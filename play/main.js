@@ -4145,7 +4145,7 @@ function grantProduct(prod) {
 }
 function renderStore() {
   const free = Monet.dailyLeft('free_shards', 3);
-  $('storeList').innerHTML = `<p class="beast">${Monet.mode === 'test' ? 'TEST MODE: no real money or ads on the web link.' : Monet.mode === 'web' ? 'WEB VERSION: no ads. Shop items are in the Android app.' : ''}</p>
+  $('storeList').innerHTML = `<p class="beast">${Monet.mode === 'test' ? 'TEST MODE: no real money or ads on the web link.' : Monet.mode === 'web' ? 'WEB VERSION: no ads, everything is free.' : ''}</p>
     ${(Monet.iapEnabled ? [...PRODUCTS] : []).sort((a, b) => (b.deal ? 2 : b.sku === 'remove_ads' ? 1 : 0) - (a.deal ? 2 : a.sku === 'remove_ads' ? 1 : 0)).map((p) => { const owned = p.once && Monet.owns(p.sku);
       return `<button class="sitem${p.deal ? ' best' : ''}${p.sku === 'remove_ads' ? ' noads' : ''}" data-sku="${p.sku}" ${owned ? 'disabled' : ''}><b>${p.name}${p.deal ? ' <i>BEST DEAL</i>' : ''}${p.sku === 'remove_ads' && !owned ? ' <i class="pop">POPULAR</i>' : ''}</b><small>${p.info}</small><em>${owned ? 'OWNED' : p.price}</em></button>`; }).join('')}
     <button class="sitem free" data-free="1" ${free > 0 ? '' : 'disabled'}><b>Free soul shards</b><small>${Monet.mode === 'web' ? 'Claim' : 'Watch an ad for'} ◆ 100 · ${free} left today</small><em>▶ FREE</em></button>

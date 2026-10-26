@@ -91,7 +91,7 @@ export const Monet = {
   get mode() { return native() ? 'app' : web() ? 'web' : 'test'; },
   get billingStatus() { return billing ? billing.status : 'off'; },
   // false on iOS while IOS_IAP is off: the game then hides every price, pack and BUY button
-  get iapEnabled() { return iap(); },
+  get iapEnabled() { return iap() && !web(); }, // web portals: no purchases, no BUY buttons
   notice,
   init() { initBilling(); },
   get adsRemoved() { return !!st.owned.remove_ads; },
