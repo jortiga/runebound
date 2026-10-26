@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>if (!/\/$|\.html$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search);</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<title>Runebound Depths</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="theme-arcane.css">
+<style id="noselect">/* phones: a double tap must never select text, show the iOS callout or zoom the page */
+html, body, body * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+input, textarea, [contenteditable] { -webkit-user-select: text; user-select: text; }
+html, body { touch-action: manipulation; }</style>
+<script id="audiofix">/* iOS leaves WebAudio "interrupted" after an app switch, or "running" but silent after Home:
+   wake every AudioContext when the app is visible again, and on the first touch after coming back
+   suspend + resume it, which restarts the audio output */
+(() => { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; const all = window.__audioCtxs = []; let kick = false;
+  function Ctx(...a) { const c = new AC(...a); all.push(c); return c; } Ctx.prototype = AC.prototype;
+  window.AudioContext = Ctx; if (window.webkitAudioContext) window.webkitAudioContext = Ctx;
+  const wake = () => { for (const c of all) if (c.state !== 'running' && c.state !== 'closed') c.resume().catch(() => {}); };
+  const tap = () => { if (!kick) return wake(); kick = false;
+    for (const c of all) if (c.state !== 'closed') c.suspend().then(() => c.resume()).catch(() => c.resume().catch(() => {})); };
+  document.addEventListener('visibilitychange', () => { if (document.hidden) kick = true; else setTimeout(wake, 300); });
+  addEventListener('pagehide', () => { kick = true; });
+  for (const ev of ['pointerdown', 'touchend', 'click', 'keydown']) addEventListener(ev, tap, { capture: true, passive: true });
+  if (/[?&]adbg/.test(location.search)) addEventListener('load', () => { // ?adbg: show each AudioContext's state on screen
+    const d = document.createElement('div'); d.style.cssText = 'position:fixed;left:0;bottom:0;z-index:99999;background:#000c;color:#0f0;font:12px monospace;padding:4px;pointer-events:none;white-space:pre';
+    document.body.appendChild(d); const log = [];
+    document.addEventListener('visibilitychange', () => log.push((document.hidden ? 'hide ' : 'show ') + all.map(c => c.state).join(',')));
+    setInterval(() => { d.textContent = all.map((c, i) => `ctx${i} ${c.state} t=${c.currentTime.toFixed(1)}`).join('\n') + '\n' + log.slice(-6).join('\n'); }, 300);
+  });
+})();</script>
+<script id="nozoom">/* iOS still allows pinch and double-tap zoom in some cases: block them; game taps are unaffected */
+document.addEventListener('gesturestart', (e) => e.preventDefault());
+document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });</script>
+<script src="ad-ids.js"></script>
+</head>
+<body>
+<div id="app">
+  <div id="view"></div>
+  <canvas id="fx"></canvas>
+  <div id="vignette"></div>
+  <div id="hurt"></div>
+  <div id="low"></div>
+  <div id="hud" class="hidden">
+    <div id="top">
+      <div id="left">
+        <div id="hearts"></div>
+        <div id="stats"><span id="pauseBtn">≡</span><span class="ico" id="coinIco"></span><span id="coins">0</span><span id="floorLbl">FLOOR 1</span></div>
+      </div>
+      <div id="right"><canvas id="minimap" width="96" height="96"></canvas></div>
+    </div>
+    <div id="bossbar" class="hidden"><div id="bossname">KING GLOOP</div><div id="bossfill"></div></div>
+    <div id="toast"></div>
+    <div id="banner"></div>
+    <div id="spells"></div>
+    <div id="stick"><div id="knob"></div></div>
+  </div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="cards" class="hidden"><h2 id="cardsTitle">ROOM CLEARED</h2><div id="cardRow"></div></div>
+  <div id="title" class="screen">
+    <h1>RUNEBOUND<br><span>DEPTHS</span></h1>
+    <p class="sub">Your spells cast themselves.<br>You just have to survive.</p>
+    <div id="titleWiz"><canvas id="titleFx"></canvas><div class="aura"></div><img src="sprites/wizard.png" alt=""><div class="shadow"></div></div>
+    <div class="menu"><button id="btnContinue" class="big hidden">CONTINUE</button><button id="btnPlay" class="big">PLAY</button><button id="btnSanctum">SANCTUM</button><button id="btnCodex">CODEX</button></div>
+    <p id="best"></p>
+    <div id="titleChest" style="width:min(380px,92%);margin-top:14px"></div>
+  </div>
+  <div id="over" class="screen hidden">
+    <h1 id="overTitle">YOU FELL</h1>
+    <div id="overStats"></div>
+    <div class="menu"><button id="btnAgain" class="big">PLAY AGAIN</button><button id="btnSanctum2">SANCTUM</button></div>
+  </div>
+  <div id="reveal" class="screen hidden"></div>
+  <div id="dungeons" class="screen panel hidden">
+    <div class="topbar"><button class="back">‹ BACK</button></div>
+    <h2>CHOOSE YOUR DUNGEON</h2><p class="beast">The whole run takes place there.</p>
+    <div id="dungeonList"></div>
+  </div>
+  <div id="sanctum" class="screen panel hidden">
+    <div class="topbar"><button class="back">‹ BACK</button><span id="shardBal" class="balpill"></span></div>
+    <div class="tabs"><button data-tab="vault" class="on">CHARACTER</button><button data-tab="ups">UPGRADES</button><button data-tab="store">STORE</button></div>
+    <div class="hidden"><div id="heroList"></div></div>
+    <div class="tab hidden" data-tab="store"><div id="storeList" style="width:100%"></div></div>
+    <div class="tab hidden" data-tab="ups"><div id="upgList"></div></div>
+    <div class="hidden"><div id="startList"></div><div id="elList"></div></div>
+    <div class="tab" data-tab="vault"><p class="beast">Keep one item each time you die. Every run starts wearing what is equipped here.</p><div id="charStats" style="width:100%"></div><div id="vaultList"></div></div>
+  </div>
+  <div id="codex" class="screen panel hidden">
+    <div class="topbar"><button class="back">‹ BACK</button></div>
+    <h2>CODEX</h2><div id="records" class="sumgrid"></div><p id="codexCount"></p><div id="codexBody"></div>
+  </div>
+  <div id="statsScr" class="screen panel hidden">
+    <div class="topbar"><button class="back">‹ BACK</button></div>
+    <h2>LIFETIME STATS</h2><div id="statList" class="sumgrid"></div>
+  </div>
+  <div id="pause" class="screen panel hidden">
+    <div class="topbar"><button class="tbtn" id="btnResume">‹ RESUME</button><button class="tbtn" id="btnSaveExit">SAVE &amp; EXIT</button><button class="tbtn quit" id="btnQuit">GIVE UP</button></div>
+    <h2>YOUR BUILD</h2><div id="buildList"></div>
+  </div>
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>

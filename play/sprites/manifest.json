@@ -1,0 +1,152 @@
+{
+  "wizard": {
+    "file": "wizard.png",
+    "frames": 1,
+    "w": 234,
+    "h": 238
+  },
+  "slime": {
+    "file": "slime.png",
+    "frames": 1,
+    "w": 213,
+    "h": 158
+  },
+  "eye": {
+    "file": "eye.png",
+    "frames": 1,
+    "w": 277,
+    "h": 178
+  },
+  "imp": {
+    "file": "imp.png",
+    "frames": 1,
+    "w": 145,
+    "h": 188
+  },
+  "skeleton": {
+    "file": "skeleton.png",
+    "frames": 1,
+    "w": 195,
+    "h": 228
+  },
+  "boss": {
+    "file": "boss.png",
+    "frames": 1,
+    "w": 855,
+    "h": 768
+  },
+  "bomber": {
+    "file": "bomber.png",
+    "frames": 1,
+    "w": 123,
+    "h": 158
+  },
+  "ghost": {
+    "file": "ghost.png",
+    "frames": 1,
+    "w": 177,
+    "h": 188
+  },
+  "shroom": {
+    "file": "shroom.png",
+    "frames": 1,
+    "w": 187,
+    "h": 178
+  },
+  "golem": {
+    "file": "golem.png",
+    "frames": 1,
+    "w": 563,
+    "h": 488
+  },
+  "shrine": {
+    "file": "shrine.png",
+    "frames": 1,
+    "w": 253,
+    "h": 288
+  },
+  "mimic": {
+    "file": "mimic.png",
+    "frames": 1,
+    "w": 369,
+    "h": 368
+  },
+  "tyrant": {
+    "file": "tyrant.png",
+    "frames": 1,
+    "w": 1121,
+    "h": 768
+  },
+  "sporemother": {
+    "file": "sporemother.png",
+    "frames": 1,
+    "w": 792,
+    "h": 768
+  },
+  "wraith": {
+    "file": "wraith.png",
+    "frames": 1,
+    "w": 600,
+    "h": 768
+  },
+  "hollow": {
+    "file": "hollow.png",
+    "frames": 1,
+    "w": 918,
+    "h": 768
+  },
+  "stoneking": {
+    "file": "stoneking.png",
+    "frames": 1,
+    "w": 932,
+    "h": 808
+  },
+  "elements": {
+    "file": "elements.png",
+    "frames": 8,
+    "w": 100,
+    "h": 136
+  },
+  "gear": {
+    "file": "gear.png",
+    "frames": 6,
+    "w": 92,
+    "h": 136
+  },
+  "amazon": {
+    "file": "amazon.png",
+    "frames": 1,
+    "w": 158,
+    "h": 238
+  },
+  "berserker": {
+    "file": "berserker.png",
+    "frames": 1,
+    "w": 268,
+    "h": 238
+  },
+  "ranger": {
+    "file": "ranger.png",
+    "frames": 1,
+    "w": 243,
+    "h": 238
+  },
+  "necro": {
+    "file": "necro.png",
+    "frames": 1,
+    "w": 249,
+    "h": 238
+  },
+  "items": {
+    "file": "items.png",
+    "frames": 6,
+    "w": 107,
+    "h": 118
+  },
+  "spells": {
+    "file": "spells.png",
+    "frames": 6,
+    "w": 134,
+    "h": 136
+  }
+}

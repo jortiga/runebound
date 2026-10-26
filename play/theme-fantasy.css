@@ -1,0 +1,56 @@
+/* Dark-fantasy theme: carved stone panels, gold trim, serif type. Remove this file's <link> to go back. */
+:root { --gold: #d9b26a; --gold-l: #f3dca0; --gold-d: #7a5a26; --stone: #1b1714; --stone-2: #26201b; --ink: #efe4cf; --dim: #a8987c; --blood: #a3242a; }
+html, body, .screen, .card, button, .sumgrid, #toast, #banner, .beast, .help, .ai, #best, .sub { font-family: "Alegreya Sans", Georgia, serif !important; }
+h1, h2, h3, #banner, #cards h2, #bossname, .menu button, .back, .tabs button, .card h3, .upg h3, #floorLbl, .shardline, .lucky, .dng b {
+  font-family: "Cinzel", Georgia, serif !important; }
+
+/* screens: dark vignette over the dungeon */
+.screen { background: radial-gradient(ellipse at 50% 40%, rgba(40,24,18,.55), rgba(6,4,3,.94) 72%) !important; }
+.panel { background: linear-gradient(rgba(10,8,7,.96), rgba(6,5,4,.98)) !important; }
+.screen h1 { font-family: "Cinzel Decorative", "Cinzel", serif !important; font-weight: 700 !important; letter-spacing: 3px !important; line-height: 1.05 !important;
+  color: var(--gold-l) !important; -webkit-text-stroke: 0 !important;
+  text-shadow: 0 2px 0 #3a2208, 0 0 18px rgba(217,178,106,.45), 0 0 40px rgba(163,36,42,.35) !important; }
+.screen h1 span { color: #e8c27a !important; }
+.screen h2, #cards h2 { color: var(--gold) !important; letter-spacing: 4px !important; font-weight: 800 !important; -webkit-text-stroke: 0 !important;
+  text-shadow: 0 2px 0 #000, 0 0 14px rgba(217,178,106,.35) !important; }
+.screen h2::after, #cards h2::after { content: ""; display: block; height: 2px; margin: 8px auto 0; width: 70%; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.panel h3 { color: var(--dim) !important; letter-spacing: 3px !important; font-weight: 600 !important; }
+.sub, .beast, #best { color: var(--dim) !important; }
+
+/* buttons: stone slab with a gold bevel */
+.menu button, .back, .upg button, .lucky {
+  color: var(--gold-l) !important; letter-spacing: 3px !important; font-weight: 800 !important; text-shadow: 0 2px 0 #000 !important;
+  background: linear-gradient(#3a3029, #231c17 55%, #1a1410) !important;
+  border: 2px solid var(--gold-d) !important; border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 rgba(243,220,160,.25), inset 0 -2px 0 rgba(0,0,0,.5), 0 3px 0 #000, 0 0 0 1px #000 !important; }
+.menu button.big { color: #fff4d8 !important; border-color: var(--gold) !important;
+  background: linear-gradient(#6a1c1e, #4a1214 55%, #34090b) !important;
+  box-shadow: inset 0 1px 0 rgba(255,200,160,.3), 0 3px 0 #000, 0 0 18px rgba(163,36,42,.55) !important; }
+.menu button:active, .back:active { transform: translateY(2px); }
+.upg button:disabled { color: #6a5e4c !important; border-color: #3a3026 !important; background: #1a1612 !important; box-shadow: none !important; }
+
+/* cards, tiles, panels */
+.card, .upg, .sp, .gearslot, #overStats, #records, #statList, .tabs button, .dng, #buildList > .sumgrid {
+  background: linear-gradient(var(--stone-2), var(--stone)) !important; border: 2px solid #4a3c2c !important; border-radius: 4px !important;
+  box-shadow: inset 0 0 0 1px #000, inset 0 1px 0 rgba(243,220,160,.08), 0 4px 10px rgba(0,0,0,.6) !important; }
+.card:hover, .card:active { border-color: var(--c, var(--gold)) !important; }
+.card .ci, .upg .ci, .sp .ci, .gearslot .ci { border-radius: 3px !important; box-shadow: 0 0 0 2px #000, 0 0 0 3px var(--gold-d) !important; }
+.card h3 { letter-spacing: 1px !important; }
+.card .tag { letter-spacing: 2px !important; color: var(--gold) !important; }
+.card p, .upg p, .gearslot { color: var(--dim) !important; }
+.upg h3 { color: var(--ink) !important; }
+.pips i.on { background: var(--gold) !important; box-shadow: 0 0 6px rgba(217,178,106,.6) !important; }
+.tabs button.on, .sp.cur { border-color: var(--gold) !important; color: var(--gold-l) !important; box-shadow: inset 0 0 12px rgba(217,178,106,.18), 0 0 10px rgba(217,178,106,.25) !important; }
+.sumgrid b { color: var(--gold-l) !important; }
+.shard { color: #c9a8ff !important; }
+
+/* in-game HUD */
+#pauseBtn, #muteBtn, #floorLbl, #minimap { background: rgba(20,16,12,.82) !important; border: 2px solid #4a3c2c !important; border-radius: 4px !important; color: var(--gold-l) !important; }
+#stats { color: var(--gold-l); }
+#banner { color: #fff4d8 !important; text-shadow: 0 3px 0 #000, 0 0 22px rgba(217,178,106,.55) !important; letter-spacing: 6px !important; }
+#banner small { color: var(--gold) !important; }
+#bossname { color: #f0c8b0 !important; letter-spacing: 3px !important; }
+#bossbar::after { border-color: #000 !important; background: #2a0c0c !important; border-radius: 2px !important; box-shadow: 0 0 0 1px var(--gold-d) !important; }
+#bossfill { background: linear-gradient(#d0383e, #7a1418) !important; border-radius: 1px !important; }
+#toast { color: var(--gold-l) !important; }
+#cards { background: radial-gradient(ellipse at 50% 40%, rgba(30,18,12,.85), rgba(4,3,2,.94)) !important; }
